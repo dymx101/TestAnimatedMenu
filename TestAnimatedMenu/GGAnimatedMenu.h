@@ -10,6 +10,6 @@
 
 @interface GGAnimatedMenu : UIView
 -(void)showInView:(UIView *)aView;
--(void)addButtonWithImage:(UIImage *)aImage selectedImage:(UIImage *)aSelectedImage target:(id)aTarget action:(SEL)anAction;
+-(void)addItemWithImage:(UIImage *)aImage selectedImage:(UIImage *)aSelectedImage target:(id)aTarget action:(SEL)anAction;
 
 @end

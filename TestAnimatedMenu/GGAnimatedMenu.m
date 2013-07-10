@@ -62,7 +62,10 @@
         
         for (int i = 0; i < itemCount; i++)
         {
-            
+            float offsetX = DEFAULT_CIRCLE_RADIOUS * cos(startAngel) - DEFAULT_BUTTON_SIZE / 2;
+            float offsetY = DEFAULT_CIRCLE_RADIOUS * sin(startAngel) - DEFAULT_BUTTON_SIZE / 2;
+            UIButton *theBtn = _menuItems[i];
+            theBtn.center = CGPointMake(centerPt.x + offsetX, centerPt.y + offsetY);
         }
     }
 }

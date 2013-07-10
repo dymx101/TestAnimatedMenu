@@ -18,6 +18,7 @@
 		EA7E895F178CDF1C0079E27E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EA7E895E178CDF1C0079E27E /* Default-568h@2x.png */; };
 		EA7E8962178CDF1C0079E27E /* GGViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA7E8961178CDF1C0079E27E /* GGViewController.m */; };
 		EA7E8965178CDF1C0079E27E /* GGViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA7E8963178CDF1C0079E27E /* GGViewController.xib */; };
+		EA7E896D178CDF910079E27E /* GGAnimatedMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = EA7E896C178CDF910079E27E /* GGAnimatedMenu.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,8 @@
 		EA7E8960178CDF1C0079E27E /* GGViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GGViewController.h; sourceTree = "<group>"; };
 		EA7E8961178CDF1C0079E27E /* GGViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GGViewController.m; sourceTree = "<group>"; };
 		EA7E8964178CDF1C0079E27E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/GGViewController.xib; sourceTree = "<group>"; };
+		EA7E896B178CDF910079E27E /* GGAnimatedMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGAnimatedMenu.h; sourceTree = "<group>"; };
+		EA7E896C178CDF910079E27E /* GGAnimatedMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGAnimatedMenu.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +92,8 @@
 				EA7E8961178CDF1C0079E27E /* GGViewController.m */,
 				EA7E8963178CDF1C0079E27E /* GGViewController.xib */,
 				EA7E894F178CDF1C0079E27E /* Supporting Files */,
+				EA7E896B178CDF910079E27E /* GGAnimatedMenu.h */,
+				EA7E896C178CDF910079E27E /* GGAnimatedMenu.m */,
 			);
 			path = TestAnimatedMenu;
 			sourceTree = "<group>";
@@ -177,6 +182,7 @@
 				EA7E8955178CDF1C0079E27E /* main.m in Sources */,
 				EA7E8959178CDF1C0079E27E /* GGAppDelegate.m in Sources */,
 				EA7E8962178CDF1C0079E27E /* GGViewController.m in Sources */,
+				EA7E896D178CDF910079E27E /* GGAnimatedMenu.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

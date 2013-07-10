@@ -18,11 +18,23 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    NSLog(@"%@", NSStringFromCGRect(self.view.frame));
 	
     GGAnimatedMenu *menu = [[GGAnimatedMenu alloc] initWithFrame:self.view.bounds];
-    [self.view addSubview:menu];
+    
+    [menu addItemWithImage:nil selectedImage:nil target:self action:@selector(dummy:)];
+    [menu addItemWithImage:nil selectedImage:nil target:self action:@selector(dummy:)];
+    [menu addItemWithImage:nil selectedImage:nil target:self action:@selector(dummy:)];
+    [menu addItemWithImage:nil selectedImage:nil target:self action:@selector(dummy:)];
+    [menu addItemWithImage:nil selectedImage:nil target:self action:@selector(dummy:)];
+    [menu addItemWithImage:nil selectedImage:nil target:self action:@selector(dummy:)];
+    
+    [menu showInView:self.view];
 }
 
-
+-(void)dummy:(id)sender
+{
+    NSLog(@"button tapped.");
+}
 
 @end

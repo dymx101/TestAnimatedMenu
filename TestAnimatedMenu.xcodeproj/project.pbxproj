@@ -17,7 +17,6 @@
 		EA7E895D178CDF1C0079E27E /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EA7E895C178CDF1C0079E27E /* Default@2x.png */; };
 		EA7E895F178CDF1C0079E27E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EA7E895E178CDF1C0079E27E /* Default-568h@2x.png */; };
 		EA7E8962178CDF1C0079E27E /* GGViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA7E8961178CDF1C0079E27E /* GGViewController.m */; };
-		EA7E8965178CDF1C0079E27E /* GGViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA7E8963178CDF1C0079E27E /* GGViewController.xib */; };
 		EA7E896D178CDF910079E27E /* GGAnimatedMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = EA7E896C178CDF910079E27E /* GGAnimatedMenu.m */; };
 /* End PBXBuildFile section */
 
@@ -37,7 +36,6 @@
 		EA7E895E178CDF1C0079E27E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		EA7E8960178CDF1C0079E27E /* GGViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GGViewController.h; sourceTree = "<group>"; };
 		EA7E8961178CDF1C0079E27E /* GGViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GGViewController.m; sourceTree = "<group>"; };
-		EA7E8964178CDF1C0079E27E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/GGViewController.xib; sourceTree = "<group>"; };
 		EA7E896B178CDF910079E27E /* GGAnimatedMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGAnimatedMenu.h; sourceTree = "<group>"; };
 		EA7E896C178CDF910079E27E /* GGAnimatedMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGAnimatedMenu.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -90,7 +88,6 @@
 				EA7E8958178CDF1C0079E27E /* GGAppDelegate.m */,
 				EA7E8960178CDF1C0079E27E /* GGViewController.h */,
 				EA7E8961178CDF1C0079E27E /* GGViewController.m */,
-				EA7E8963178CDF1C0079E27E /* GGViewController.xib */,
 				EA7E894F178CDF1C0079E27E /* Supporting Files */,
 				EA7E896B178CDF910079E27E /* GGAnimatedMenu.h */,
 				EA7E896C178CDF910079E27E /* GGAnimatedMenu.m */,
@@ -168,7 +165,6 @@
 				EA7E895B178CDF1C0079E27E /* Default.png in Resources */,
 				EA7E895D178CDF1C0079E27E /* Default@2x.png in Resources */,
 				EA7E895F178CDF1C0079E27E /* Default-568h@2x.png in Resources */,
-				EA7E8965178CDF1C0079E27E /* GGViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,14 +191,6 @@
 				EA7E8952178CDF1C0079E27E /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		EA7E8963178CDF1C0079E27E /* GGViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				EA7E8964178CDF1C0079E27E /* en */,
-			);
-			name = GGViewController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -305,6 +293,7 @@
 				EA7E896A178CDF1C0079E27E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

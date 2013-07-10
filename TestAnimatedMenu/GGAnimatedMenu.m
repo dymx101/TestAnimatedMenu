@@ -10,13 +10,21 @@
 #import <QuartzCore/QuartzCore.h>
 
 #define DEFAULT_BUTTON_SIZE         40.f
-#define DEFAULT_CIRCLE_RADIOUS          200.f
+//#define DEFAULT_CIRCLE_RADIOUS          200.f
 #define DEFAULT_CIRCLE_RADIOUS_NEAR     80.f
+
+static BOOL __isShowing = NO;
 
 @implementation GGAnimatedMenu
 {
     NSMutableArray      *_menuItems;
     UIView              *_dimedView;
+    UIView              *_rotateView;
+}
+
++(BOOL)isShowing
+{
+    return __isShowing;
 }
 
 -(id)initWithCoder:(NSCoder *)aDecoder
@@ -41,6 +49,9 @@
 
 -(void)_doInit
 {
+    _menuRadious = DEFAULT_CIRCLE_RADIOUS_NEAR;
+    _menuItemRadious = DEFAULT_BUTTON_SIZE;
+    
     _menuItems = [NSMutableArray array];
     
     _dimedView = [[UIView alloc] initWithFrame:self.bounds];
@@ -49,12 +60,21 @@
     _dimedView.layer.opacity = .5f;
     [self addSubview:_dimedView];
     
+    _rotateView = [[UIView alloc] initWithFrame:self.bounds];
+    _rotateView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    //_rotateView.backgroundColor = [UIColor clearColor];
+    //_rotateView.layer.opacity = .5f;
+    [self addSubview:_rotateView];
+    
     UITapGestureRecognizer *tapToDissmiss = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)];
-    [_dimedView addGestureRecognizer:tapToDissmiss];
+    [self addGestureRecognizer:tapToDissmiss];
 }
 
 -(void)showInView:(UIView *)aView
 {
+    if (__isShowing) return;
+    __isShowing = YES;
+    
     self.frame = aView.bounds;
     int itemCount = _menuItems.count;
     
@@ -75,31 +95,42 @@
     if (itemCount)
     {
         self.alpha = .3f;
-        [self _arrangeButtonsWithRadious:DEFAULT_CIRCLE_RADIOUS];
-        
+        [self _arrangeButtonsWithRadious:[self _maxMenuRadious]];
+        _rotateView.transform = CGAffineTransformMakeRotation(-M_PI);
         //
         [UIView animateWithDuration:.2f animations:^{
             
-            [self _arrangeButtonsWithRadious:DEFAULT_CIRCLE_RADIOUS_NEAR];
+            [self _arrangeButtonsWithRadious:_menuRadious];
             self.alpha = 1.f;
             
+            
         } completion:^(BOOL finished) {
-            //
+            
+            [UIView animateWithDuration:1.f delay:0.f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                _rotateView.transform = CGAffineTransformIdentity;
+            } completion:nil];
         }];
     }
     
     [aView addSubview:self];
 }
 
+-(float)_maxMenuRadious
+{
+    CGSize thisSize = self.frame.size;
+    return MAX(thisSize.width, thisSize.height) + _menuItemRadious;
+}
+
 -(void)dismiss
 {
     [UIView animateWithDuration:.2f animations:^{
         
-        [self _arrangeButtonsWithRadious:DEFAULT_CIRCLE_RADIOUS];
+        [self _arrangeButtonsWithRadious:[self _maxMenuRadious]];
         self.alpha = .3f;
         
     } completion:^(BOOL finished) {
         [self removeFromSuperview];
+        __isShowing = NO;
     }];
 }
 
@@ -115,8 +146,8 @@
         
         for (int i = 0; i < itemCount; i++)
         {
-            float offsetX = aRadious * cos(startAngel);// - DEFAULT_BUTTON_SIZE / 2;
-            float offsetY = aRadious * sin(startAngel);// - DEFAULT_BUTTON_SIZE / 2;
+            float offsetX = aRadious * cos(startAngel);
+            float offsetY = aRadious * sin(startAngel);
             
             //NSLog(@"center:%@, radious:%f, angel:%f, size:%f, offsetX:%f, offsetY:%f", NSStringFromCGPoint(centerPt), DEFAULT_CIRCLE_RADIOUS, (startAngel * 180 / M_PI), DEFAULT_BUTTON_SIZE, offsetX, offsetY);
             
@@ -131,8 +162,8 @@
 -(void)addItemWithImage:(UIImage *)aImage selectedImage:(UIImage *)aSelectedImage target:(id)aTarget action:(SEL)anAction
 {
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame = CGRectMake(0, 0, DEFAULT_BUTTON_SIZE, DEFAULT_BUTTON_SIZE);
-    btn.layer.cornerRadius = DEFAULT_BUTTON_SIZE / 2;
+    btn.frame = CGRectMake(0, 0, _menuItemRadious, _menuItemRadious);
+    btn.layer.cornerRadius = _menuItemRadious / 2;
     btn.backgroundColor = [UIColor blackColor];
     btn.layer.opacity = .5f;
     [btn setImage:aImage forState:UIControlStateNormal];
@@ -145,7 +176,7 @@
         [btn addTarget:aTarget action:anAction forControlEvents:UIControlEventTouchUpInside];
     }
     
-    [self addSubview:btn];
+    [_rotateView addSubview:btn];
     [_menuItems addObject:btn];
 }
 

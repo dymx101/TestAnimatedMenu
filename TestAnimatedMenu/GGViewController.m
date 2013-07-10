@@ -27,6 +27,8 @@
 -(void)showMenu
 {
     GGAnimatedMenu *menu = [[GGAnimatedMenu alloc] initWithFrame:self.view.bounds];
+    menu.menuItemRadious = 60.f;
+    menu.menuRadious = 70.f;
     
     [menu addItemWithImage:nil selectedImage:nil target:self action:@selector(dummy:)];
     [menu addItemWithImage:nil selectedImage:nil target:self action:@selector(dummy:)];
@@ -34,8 +36,8 @@
     [menu addItemWithImage:nil selectedImage:nil target:self action:@selector(dummy:)];
     [menu addItemWithImage:nil selectedImage:nil target:self action:@selector(dummy:)];
     [menu addItemWithImage:nil selectedImage:nil target:self action:@selector(dummy:)];
-    [menu addItemWithImage:nil selectedImage:nil target:self action:@selector(dummy:)];
-    [menu addItemWithImage:nil selectedImage:nil target:self action:@selector(dummy:)];
+    //[menu addItemWithImage:nil selectedImage:nil target:self action:@selector(dummy:)];
+    //[menu addItemWithImage:nil selectedImage:nil target:self action:@selector(dummy:)];
     
     [menu showInView:self.view];
 }
@@ -43,7 +45,7 @@
 -(void)dummy:(id)sender
 {
     UIButton *btn = sender;
-    [btn.superview performSelector:@selector(dismiss)];
+    [btn.superview.superview performSelector:@selector(dismiss)];
     NSLog(@"button tapped.");
 }
 

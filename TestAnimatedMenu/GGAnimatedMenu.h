@@ -9,8 +9,13 @@
 #import <UIKit/UIKit.h>
 
 @interface GGAnimatedMenu : UIView
+
+@property (assign) float menuItemRadious;
+@property (assign) float menuRadious;
+
 -(void)showInView:(UIView *)aView;
 -(void)dismiss;
 -(void)addItemWithImage:(UIImage *)aImage selectedImage:(UIImage *)aSelectedImage target:(id)aTarget action:(SEL)anAction;
 
++(BOOL)isShowing;
 @end

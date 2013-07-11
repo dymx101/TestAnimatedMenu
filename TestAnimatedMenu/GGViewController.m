@@ -9,6 +9,8 @@
 #import "GGViewController.h"
 #import "GGAnimatedMenu.h"
 
+#define MENU_TAG        (20130711)
+
 @interface GGViewController ()
 
 @end
@@ -27,26 +29,61 @@
 -(void)showMenu
 {
     GGAnimatedMenu *menu = [[GGAnimatedMenu alloc] initWithFrame:self.view.bounds];
-    menu.menuItemRadious = 60.f;
+    menu.tag = MENU_TAG;
+    menu.menuItemRadious = 53.f;
     menu.menuRadious = 70.f;
     
-    [menu addItemWithImage:nil selectedImage:nil target:self action:@selector(dummy:)];
-    [menu addItemWithImage:nil selectedImage:nil target:self action:@selector(dummy:)];
-    [menu addItemWithImage:nil selectedImage:nil target:self action:@selector(dummy:)];
-    [menu addItemWithImage:nil selectedImage:nil target:self action:@selector(dummy:)];
-    [menu addItemWithImage:nil selectedImage:nil target:self action:@selector(dummy:)];
-    [menu addItemWithImage:nil selectedImage:nil target:self action:@selector(dummy:)];
-    //[menu addItemWithImage:nil selectedImage:nil target:self action:@selector(dummy:)];
-    //[menu addItemWithImage:nil selectedImage:nil target:self action:@selector(dummy:)];
+    __weak GGAnimatedMenu *menuShadow = menu;
+    
+    [menu addItemWithImage:[UIImage imageNamed:@"share_chatter"] selectedImage:nil action:^{
+        NSLog(@"share chatter");
+        [menuShadow dismiss];
+    }];
+    
+    [menu addItemWithImage:[UIImage imageNamed:@"share_linkedin"] selectedImage:nil action:^{
+        NSLog(@"share linkedIn");
+        [menuShadow dismiss];
+    }];
+    
+    [menu addItemWithImage:[UIImage imageNamed:@"share_twitter"] selectedImage:nil action:^{
+        NSLog(@"share twitter");
+        [menuShadow dismiss];
+    }];
+    
+    [menu addItemWithImage:[UIImage imageNamed:@"share_facebook"] selectedImage:nil action:^{
+        NSLog(@"share facebook");
+        [menuShadow dismiss];
+    }];
+    
+    [menu addItemWithImage:[UIImage imageNamed:@"share_mail"] selectedImage:nil action:^{
+        NSLog(@"share mail");
+        [menuShadow dismiss];
+    }];
+    
+    [menu addItemWithImage:[UIImage imageNamed:@"share_message"] selectedImage:nil action:^{
+        NSLog(@"share message");
+        [menuShadow dismiss];
+    }];
     
     [menu showInView:self.view];
 }
 
--(void)dummy:(id)sender
+-(void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
-    UIButton *btn = sender;
-    [btn.superview.superview performSelector:@selector(dismiss)];
-    NSLog(@"button tapped.");
+    CGRect futureRect = [UIScreen mainScreen].bounds;
+    NSLog(@"screen rect:%@", NSStringFromCGRect(futureRect));
+    
+    float min = MIN(futureRect.size.width, futureRect.size.height);
+    float max = MAX(futureRect.size.width, futureRect.size.height);
+    
+    BOOL willRotateToPotrait = UIInterfaceOrientationIsPortrait(toInterfaceOrientation);
+    float deduction = 20 + (willRotateToPotrait ? 44 : 32);
+    futureRect = willRotateToPotrait ? CGRectMake(0, 0, min, max) : CGRectMake(0, 0, max, min);
+    futureRect.size.height -= deduction;
+    NSLog(@"future rect:%@, deduction:%f", NSStringFromCGRect(futureRect), deduction);
+    
+    GGAnimatedMenu *menu = (GGAnimatedMenu *)[self.view viewWithTag:MENU_TAG];
+    [menu relayoutToFitRect:futureRect];
 }
 
 @end

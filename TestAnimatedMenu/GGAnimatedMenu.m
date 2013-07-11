@@ -9,15 +9,18 @@
 #import "GGAnimatedMenu.h"
 #import <QuartzCore/QuartzCore.h>
 
-#define DEFAULT_BUTTON_SIZE         40.f
-//#define DEFAULT_CIRCLE_RADIOUS          200.f
-#define DEFAULT_CIRCLE_RADIOUS_NEAR     80.f
+#define DEFAULT_BUTTON_SIZE             (40.f)
+#define DEFAULT_CIRCLE_RADIOUS_NEAR     (80.f)
+
+#define BUTTON_TAG_BASE                 (1000);
 
 static BOOL __isShowing = NO;
 
 @implementation GGAnimatedMenu
 {
     NSMutableArray      *_menuItems;
+    NSMutableArray      *_actions;
+    
     UIView              *_dimedView;
     UIView              *_rotateView;
 }
@@ -53,6 +56,7 @@ static BOOL __isShowing = NO;
     _menuItemRadious = DEFAULT_BUTTON_SIZE;
     
     _menuItems = [NSMutableArray array];
+    _actions = [NSMutableArray array];
     
     _dimedView = [[UIView alloc] initWithFrame:self.bounds];
     _dimedView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -134,6 +138,17 @@ static BOOL __isShowing = NO;
     }];
 }
 
+-(void)relayoutToFitRect:(CGRect)aRect
+{
+    if (self.superview)
+    {
+        [self.layer removeAllAnimations];
+        
+        self.frame = aRect;
+        [self _arrangeButtonsWithRadious:_menuRadious];
+    }
+}
+
 -(void)_arrangeButtonsWithRadious:(float)aRadious
 {
     int itemCount = _menuItems.count;
@@ -159,25 +174,38 @@ static BOOL __isShowing = NO;
     }
 }
 
--(void)addItemWithImage:(UIImage *)aImage selectedImage:(UIImage *)aSelectedImage target:(id)aTarget action:(SEL)anAction
+-(UIButton *)addItemWithImage:(UIImage *)aImage selectedImage:(UIImage *)aSelectedImage action:(GGAnimatedMenuAction)anAction
 {
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.frame = CGRectMake(0, 0, _menuItemRadious, _menuItemRadious);
     btn.layer.cornerRadius = _menuItemRadious / 2;
     btn.backgroundColor = [UIColor blackColor];
-    btn.layer.opacity = .5f;
+    //btn.layer.opacity = .5f;
     [btn setImage:aImage forState:UIControlStateNormal];
     [btn setImage:aSelectedImage forState:UIControlStateSelected | UIControlStateHighlighted];
     
-    [btn setTitle:[NSString stringWithFormat:@"%d", _menuItems.count + 1] forState:UIControlStateNormal];
+    btn.tag = _menuItems.count + BUTTON_TAG_BASE;
+    //[btn setTitle:[NSString stringWithFormat:@"%d", _menuItems.count + 1] forState:UIControlStateNormal];
     
-    if (aTarget && anAction)
-    {
-        [btn addTarget:aTarget action:anAction forControlEvents:UIControlEventTouchUpInside];
-    }
+    [btn addTarget:self action:@selector(menuItemTapped:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [_actions addObject:(anAction ? [anAction copy] : [NSNull null])];
     
     [_rotateView addSubview:btn];
     [_menuItems addObject:btn];
+    
+    return btn;
+}
+
+-(void)menuItemTapped:(id)sender
+{
+    int index = ((UIButton *)sender).tag - BUTTON_TAG_BASE;
+    GGAnimatedMenuAction action = _actions[index];
+    
+    if (![action isKindOfClass:[NSNull class]])
+    {
+        action();
+    }
 }
 
 @end

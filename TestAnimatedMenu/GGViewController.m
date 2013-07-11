@@ -29,7 +29,7 @@
 -(void)showMenu
 {
     GGAnimatedMenu *menu = [[GGAnimatedMenu alloc] initWithFrame:self.view.bounds];
-    menu.tag = MENU_TAG;
+
     menu.menuItemRadious = 53.f;
     menu.menuRadious = 70.f;
     
@@ -82,7 +82,7 @@
     futureRect.size.height -= deduction;
     NSLog(@"future rect:%@, deduction:%f", NSStringFromCGRect(futureRect), deduction);
     
-    GGAnimatedMenu *menu = (GGAnimatedMenu *)[self.view viewWithTag:MENU_TAG];
+    GGAnimatedMenu *menu = (GGAnimatedMenu *)[self.view viewWithTag:[GGAnimatedMenu tag]];
     [menu relayoutToFitRect:futureRect];
 }
 

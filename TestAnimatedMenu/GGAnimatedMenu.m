@@ -12,7 +12,8 @@
 #define DEFAULT_BUTTON_SIZE             (40.f)
 #define DEFAULT_CIRCLE_RADIOUS_NEAR     (80.f)
 
-#define BUTTON_TAG_BASE                 (1000);
+#define BUTTON_TAG_BASE                 (1000)
+#define MENU_TAG                        (10086)
 
 static BOOL __isShowing = NO;
 
@@ -23,6 +24,11 @@ static BOOL __isShowing = NO;
     
     UIView              *_dimedView;
     UIView              *_rotateView;
+}
+
++(int)tag
+{
+    return MENU_TAG;
 }
 
 +(BOOL)isShowing
@@ -52,6 +58,8 @@ static BOOL __isShowing = NO;
 
 -(void)_doInit
 {
+    self.tag = [GGAnimatedMenu tag];
+    
     _menuRadious = DEFAULT_CIRCLE_RADIOUS_NEAR;
     _menuItemRadious = DEFAULT_BUTTON_SIZE;
     
@@ -178,8 +186,8 @@ static BOOL __isShowing = NO;
 {
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.frame = CGRectMake(0, 0, _menuItemRadious, _menuItemRadious);
-    btn.layer.cornerRadius = _menuItemRadious / 2;
-    btn.backgroundColor = [UIColor blackColor];
+    //btn.layer.cornerRadius = _menuItemRadious / 2;
+    //btn.backgroundColor = [UIColor blackColor];
     //btn.layer.opacity = .5f;
     [btn setImage:aImage forState:UIControlStateNormal];
     [btn setImage:aSelectedImage forState:UIControlStateSelected | UIControlStateHighlighted];

@@ -41,4 +41,6 @@ typedef void (^GGAnimatedMenuAction)(void);
 -(void)relayoutToFitRect:(CGRect)aRect;
 
 +(BOOL)isShowing;
++(int)tag;
+
 @end
